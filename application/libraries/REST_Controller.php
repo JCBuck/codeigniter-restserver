@@ -500,7 +500,12 @@ abstract class REST_Controller extends CI_Controller
         }
 
         set_status_header($http_code);
-        $this->_log_response_code($http_code);
+        
+        //Only log if rest logging enabled!
+        if (config_item('rest_enable_logging')) {
+            $this->_log_response_code($http_code);
+        }
+        
         
         // If zlib.output_compression is enabled it will compress the output,
         // but it will not modify the content-length header to compensate for
